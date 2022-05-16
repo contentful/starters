@@ -11,7 +11,7 @@ export default function CoverImage({ title, url, slug }) {
       className={cn("shadow-small", {
         "hover:shadow-medium transition-shadow duration-200": slug,
       })}
-      src={url}
+      src="https://images.unsplash.com/photo-1524134132825-dbe30ff69879?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8"
     />
   );
 

@@ -31,14 +31,7 @@ export default function HeroPost({ title, date, excerpt, author, slug }) {
         </div>
         <div>
           <p className="text-lg leading-relaxed mb-4">{excerpt}</p>
-          {author && (
-            <Avatar
-              name={author.name}
-              picture={{
-                url: "https://images.unsplash.com/photo-1529688530647-93a6e1916f5f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
-              }}
-            />
-          )}
+          {author && <Avatar name={author.name} />}
         </div>
       </div>
     </section>
