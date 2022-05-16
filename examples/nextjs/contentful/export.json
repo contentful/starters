@@ -38,7 +38,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 2,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -112,7 +112,7 @@
           }
         },
         "publishedCounter": 2,
-        "version": 4,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -286,7 +286,7 @@
             "linkType": "Space"
           }
         },
-        "version": 2,
+        "version": 1,
         "createdAt": "2020-04-22T09:32:50.954Z",
         "createdBy": {
           "sys": {
@@ -342,7 +342,7 @@
             "linkType": "Space"
           }
         },
-        "version": 4,
+        "version": 1,
         "createdAt": "2020-04-22T09:34:37.309Z",
         "createdBy": {
           "sys": {
@@ -1065,7 +1065,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 8,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -1171,7 +1171,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 3,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
