@@ -60,17 +60,6 @@
           "validations": [],
           "disabled": false,
           "omitted": false
-        },
-        {
-          "id": "picture",
-          "name": "Picture",
-          "type": "Link",
-          "localized": false,
-          "required": true,
-          "validations": [],
-          "disabled": false,
-          "omitted": false,
-          "linkType": "Asset"
         }
       ]
     },
@@ -236,17 +225,6 @@
           "omitted": false
         },
         {
-          "id": "coverImage",
-          "name": "Cover Image",
-          "type": "Link",
-          "localized": false,
-          "required": true,
-          "validations": [],
-          "disabled": false,
-          "omitted": false,
-          "linkType": "Asset"
-        },
-        {
           "id": "date",
           "name": "Date",
           "type": "Date",
@@ -323,11 +301,6 @@
           "fieldId": "name",
           "widgetId": "singleLine",
           "widgetNamespace": "builtin"
-        },
-        {
-          "fieldId": "picture",
-          "widgetId": "assetLinkEditor",
-          "widgetNamespace": "builtin"
         }
       ]
     },
@@ -393,11 +366,6 @@
         {
           "fieldId": "excerpt",
           "widgetId": "singleLine",
-          "widgetNamespace": "builtin"
-        },
-        {
-          "fieldId": "coverImage",
-          "widgetId": "assetLinkEditor",
           "widgetNamespace": "builtin"
         },
         {
