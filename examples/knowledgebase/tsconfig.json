@@ -1,0 +1,61 @@
+{
+  "ts-node": {
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
+  "compilerOptions": {
+    // we can explicitly declare `any`, but we don't want to infer `any`
+    "noImplicitAny": false,
+    "composite": true,
+    "target": "es6",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    // allows react jsx in tsx files
+    "jsx": "preserve",
+    // Eventually turn off, one we have no more assumed default exports.
+    // Allow default imports from modules with no default export.
+    "allowSyntheticDefaultImports": true,
+    // allows importing of json files, needed for locales as of right now
+    "resolveJsonModule": true,
+    // Search under node_modules for non-relative imports.
+    "moduleResolution": "node",
+    // Process & infer types from .js files.
+    "allowJs": true,
+    // Don't emit; allow Babel to transform files.
+    "noEmit": true,
+    // Disallow features that require cross-file information for emit.
+    "isolatedModules": true,
+    // Import non-ES modules as default imports.
+    "esModuleInterop": true,
+    "paths": {
+      "@/scripts/*": [
+        "./scripts/*"
+      ]
+    },
+    "skipLibCheck": true,
+    "typeRoots": [
+      "node_modules/@types",
+      "./types"
+    ],
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "incremental": true,
+    "module": "esnext"
+  },
+  "include": [
+    "packages",
+    "types",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
+  ],
+  "exclude": [
+    "**/node_modules",
+    "**/dist",
+    ".next"
+  ]
+}
