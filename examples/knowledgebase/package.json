@@ -1,5 +1,5 @@
 {
-  "name": "@contentful/f36-website",
+  "name": "knowledge-base",
   "version": "0.1.0",
   "private": true,
   "scripts": {
