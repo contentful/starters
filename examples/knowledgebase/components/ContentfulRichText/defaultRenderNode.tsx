@@ -1,5 +1,5 @@
-import React from 'react';
-import slugger from 'github-slugger';
+import React from "react";
+import slugger from "github-slugger";
 
 import {
   Heading,
@@ -8,11 +8,11 @@ import {
   List,
   Table,
   TextLink,
-} from '@contentful/f36-components';
-import { BLOCKS, INLINES } from '@contentful/rich-text-types';
-import type { Block, Inline, Text } from '@contentful/rich-text-types';
-import type { RenderNode } from '@contentful/rich-text-react-renderer';
-import { StaticSource } from '../LiveEditor/StaticSource';
+} from "@contentful/f36-components";
+import { BLOCKS, INLINES } from "@contentful/rich-text-types";
+import type { Block, Inline, Text } from "@contentful/rich-text-types";
+import type { RenderNode } from "@contentful/rich-text-react-renderer";
+import { StaticSource } from "../LiveEditor/StaticSource";
 
 const getHeadingId = (node: Block | Inline) =>
   slugger.slug((node.content[0] as Text).value, false);
@@ -23,6 +23,13 @@ export function getRenderNode(links): RenderNode {
   for (const entry of links.entries.block) {
     entryMap.set(entry.sys.id, entry);
   }
+
+  const assetMap = new Map();
+  // loop through the assets and add them to the map
+  for (const asset of links.assets.block) {
+    assetMap.set(asset.sys.id, asset);
+  }
+
   return {
     [BLOCKS.PARAGRAPH]: (_node, children) => {
       return <Paragraph>{children}</Paragraph>;
@@ -74,9 +81,25 @@ export function getRenderNode(links): RenderNode {
         <List.Item>{children}</List.Item>
       </List>
     ),
+    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+      const asset = assetMap.get(node.data.target.sys.id);
+      return (
+        <img
+          alt={asset.description}
+          height={asset.height}
+          src={asset.url}
+          width={asset.width}
+        />
+      );
+    },
     [BLOCKS.EMBEDDED_ENTRY]: (node) => {
       const entry = entryMap.get(node.data.target.sys.id);
-      return <StaticSource children={entry.code} className="language-jsx" />;
+      return (
+        <StaticSource
+          children={entry.code}
+          className={`language-${entry.language ?? "jsx"}`}
+        />
+      );
     },
     [INLINES.HYPERLINK]: (node, children) => {
       return <TextLink href={node.data.uri}>{children}</TextLink>;

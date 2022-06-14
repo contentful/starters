@@ -1,46 +1,40 @@
-{
-  "guidelines": [
-    {
-      "title": "Accessibility",
-      "slug": "/guidelines/accessibility"
-    },
-    {
-      "title": "Adding icons",
-      "slug": "/guidelines/adding-icons"
-    },
-    {
-      "title": "Grammar and rules",
-      "slug": "/guidelines/grammar-and-rules"
-    },
-    {
-      "title": "Keyboard Shortcuts",
-      "slug": "/guidelines/keyboard-shortcuts"
-    },
-    {
-      "title": "UX Writing Principles",
-      "slug": "/guidelines/ux-writing-principles"
-    }
-  ],
-  "introduction": [
-    {
-      "title": "Contributing to Forma 36",
-      "slug": "/introduction/contributing"
-    },
-    {
-      "title": "FAQ",
-      "slug": "/introduction/v3-faq"
-    },
-    {
-      "title": "Getting started",
-      "slug": "/introduction/getting-started"
-    },
-    {
-      "title": "Migration Guide",
-      "slug": "/introduction/migration-v3-to-v4"
-    },
-    {
-      "title": "Version 3 maintenance plan",
-      "slug": "/introduction/maintenance-plan"
-    }
-  ]
-}
+[
+  {
+    "description": "Content model overview",
+    "links": [
+      {
+        "slug": "/content-model-overview/kb-app-content-model-overview",
+        "title": "KB App Content Model Overview"
+      }
+    ],
+    "slug": "/content-model-overview",
+    "title": "Content Model Overview"
+  },
+  {
+    "description": "Articles on getting started.",
+    "links": [
+      {
+        "slug": "/getting-started/overview",
+        "title": "Overview"
+      },
+      {
+        "slug": "/getting-started/frequently-asked-questions",
+        "title": "FAQs"
+      },
+      {
+        "slug": "/getting-started/embed-assets",
+        "title": "Embed assets"
+      },
+      {
+        "slug": "/getting-started/using-references",
+        "title": "Using references"
+      },
+      {
+        "slug": "/getting-started/kristoffer-is-testing",
+        "title": "Kristoffer is testing"
+      }
+    ],
+    "slug": "/getting-started",
+    "title": "Getting Started"
+  }
+]

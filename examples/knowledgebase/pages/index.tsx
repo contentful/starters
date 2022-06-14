@@ -1,8 +1,9 @@
-import React from 'react';
-import { css } from 'emotion';
-import Image from 'next/image';
-import Link from 'next/link';
-import tokens from '@contentful/f36-tokens';
+import React from "react";
+import type { GetStaticProps } from "next";
+import { css } from "emotion";
+import Image from "next/image";
+import Link from "next/link";
+import tokens from "@contentful/f36-tokens";
 import {
   DisplayText,
   Heading,
@@ -10,35 +11,36 @@ import {
   Flex,
   TextLink,
   Button,
-} from '@contentful/f36-components';
-import { ArrowForwardTrimmedIcon } from '@contentful/f36-icons';
+} from "@contentful/f36-components";
+import { ArrowForwardTrimmedIcon } from "@contentful/f36-icons";
 
-import figmaSVG from '../resources/icons/figma-icon.svg';
-import reactSVG from '../resources/icons/react-icon.svg';
-import homepageImg from '../public/images/homepage-illustration.svg';
-import { SCREEN_BREAKPOINT_LARGE } from '../utils/getGridStyles';
+import figmaSVG from "../resources/icons/figma-icon.svg";
+import reactSVG from "../resources/icons/react-icon.svg";
+import homepageImg from "../public/images/homepage-illustration.svg";
+import { SCREEN_BREAKPOINT_LARGE } from "../utils/getGridStyles";
+import { getAllCategories } from "../lib/api";
 
 const styles = {
   grid: css({
     flex: 1, // this is necessary to make the footer sticky to the bottom of the page
     padding: `${tokens.spacing3Xl} ${tokens.spacingL} 0`,
     [`@media screen and (min-width: ${SCREEN_BREAKPOINT_LARGE})`]: {
-      display: 'grid',
-      gridTemplateColumns: '1fr 960px 1fr',
-      gridTemplateRows: 'min-content',
+      display: "grid",
+      gridTemplateColumns: "1fr 960px 1fr",
+      gridTemplateRows: "min-content",
     },
-    '> *': {
+    "> *": {
       [`@media screen and (min-width: ${SCREEN_BREAKPOINT_LARGE})`]: {
         gridColumnStart: 2,
       },
     },
   }),
   sections: css({
-    '> *': {
-      maxWidth: '220px',
+    "> *": {
+      maxWidth: "220px",
     },
   }),
-  imgContainer: css({ flexGrow: 1, '> span': { flexGrow: 1 } }),
+  imgContainer: css({ flexGrow: 1, "> span": { flexGrow: 1 } }),
 };
 
 export default function Home() {
@@ -114,3 +116,9 @@ export default function Home() {
     </article>
   );
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  await getAllCategories();
+
+  return { props: {} };
+};

@@ -1,23 +1,19 @@
-import dotenv from 'dotenv';
-import { writeFileSync } from 'fs';
-import prettier from 'prettier';
-import { getMdxPaths } from '../utils/content';
+import dotenv from "dotenv";
+import { writeFileSync } from "fs";
+import prettier from "prettier";
 
 dotenv.config();
 
 const deploymentUrl =
-  process.env.PRODUCTION_URL || process.env.VERCEL_URL || 'f36.contentful.com';
+  process.env.PRODUCTION_URL || process.env.VERCEL_URL || "YOUR_WEBSITE_DOMAIN";
 const deploymentUrlWithProtocol = `https://${deploymentUrl}`;
 
 async function generateSitemap() {
   // a list of static pages
   // for now we only have `index.tsx`, so the url is an empty string
-  const staticSlugs = ['', 'playground'];
-  const mdxSlugs = (await getMdxPaths())
-    .map((item) => item.params.slug)
-    .map((slugs) => slugs.join('/'));
+  const staticSlugs = [""];
 
-  const fullUrls = [...staticSlugs, ...mdxSlugs].map((staticPagePath) => {
+  const fullUrls = [...staticSlugs].map((staticPagePath) => {
     return `${deploymentUrlWithProtocol}/${staticPagePath}`;
   });
 
@@ -34,22 +30,22 @@ async function generateSitemap() {
           </url>
         `;
       })
-      .join('')}
+      .join("")}
   </urlset>
 `;
 
   const formatted = prettier.format(sitemap, {
-    parser: 'html',
+    parser: "html",
   });
 
   // eslint-disable-next-line no-sync
-  writeFileSync('public/sitemap.xml', formatted);
+  writeFileSync("public/sitemap.xml", formatted);
 }
 
 async function generateRobots() {
   // eslint-disable-next-line no-sync
   writeFileSync(
-    'public/robots.txt',
+    "public/robots.txt",
     `# *
 User-agent: *
 Allow: /
@@ -59,7 +55,7 @@ Host: ${deploymentUrlWithProtocol}
 
 # Sitemaps
 Sitemap: ${deploymentUrlWithProtocol}/sitemap.xml
-`,
+`
   );
 }
 
