@@ -30,6 +30,7 @@
   "devDependencies": {
     "@contentful/rich-text-types": "^15.11.1",
     "@next/eslint-plugin-next": "^12.1.1",
+    "@types/node": "^16.0.0",
     "dotenv": "^10.0.0",
     "prettier": "^2.5.1",
     "ts-node": "^10.7.0",
