@@ -8,7 +8,6 @@ import {
   TOPBAR_HEIGHT,
   SCREEN_BREAKPOINT_LARGE,
 } from "../../utils/getGridStyles";
-import { DocSearch } from "../DocSearch";
 import { TopbarLogo } from "./TopbarLogo";
 
 const styles = {
@@ -28,14 +27,6 @@ const styles = {
       fontSize: tokens.fontSizeL,
     },
   }),
-  docSearchContainer: css({
-    "& .algolia-autocomplete": {
-      width: "100%",
-    },
-    [`@media screen and (min-width: ${SCREEN_BREAKPOINT_LARGE})`]: {
-      gridColumnStart: 4,
-    },
-  }),
 };
 
 export function Topbar() {
@@ -49,19 +40,6 @@ export function Topbar() {
     >
       <Flex paddingLeft="spacingXl">
         <TopbarLogo />
-      </Flex>
-
-      <Flex
-        justifyContent="space-between"
-        alignItems="center"
-        className={cx(
-          gridStyles.contentColumns,
-          gridStyles.contentColumnsBigScreens
-        )}
-      >
-        <Flex className={styles.docSearchContainer}>
-          <DocSearch />
-        </Flex>
       </Flex>
     </Grid.Item>
   );

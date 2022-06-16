@@ -2,7 +2,6 @@ import React from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { GlobalStyles as FormaGlobalStyles } from "@contentful/f36-components";
-import "docsearch.js/dist/cdn/docsearch.min.css";
 
 import { GlobalStyles } from "../components/GlobalStyles";
 
