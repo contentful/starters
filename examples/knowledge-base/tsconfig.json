@@ -1,9 +1,4 @@
 {
-  "ts-node": {
-    "compilerOptions": {
-      "module": "commonjs"
-    }
-  },
   "compilerOptions": {
     // we can explicitly declare `any`, but we don't want to infer `any`
     "noImplicitAny": false,
