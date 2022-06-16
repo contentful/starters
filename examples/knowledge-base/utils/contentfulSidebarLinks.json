@@ -1,0 +1,40 @@
+[
+  {
+    "description": "Content model overview",
+    "links": [
+      {
+        "slug": "/content-model-overview/kb-app-content-model-overview",
+        "title": "KB App Content Model Overview"
+      }
+    ],
+    "slug": "/content-model-overview",
+    "title": "Content Model Overview"
+  },
+  {
+    "description": "Articles on getting started.",
+    "links": [
+      {
+        "slug": "/getting-started/overview",
+        "title": "Overview"
+      },
+      {
+        "slug": "/getting-started/frequently-asked-questions",
+        "title": "FAQs"
+      },
+      {
+        "slug": "/getting-started/embed-assets",
+        "title": "Embed assets"
+      },
+      {
+        "slug": "/getting-started/using-references",
+        "title": "Using references"
+      },
+      {
+        "slug": "/getting-started/kristoffer-is-testing",
+        "title": "Kristoffer is testing"
+      }
+    ],
+    "slug": "/getting-started",
+    "title": "Getting Started"
+  }
+]
