@@ -50,22 +50,11 @@ export function Footer() {
           <FooterLink href="https://f36.contentful.com/" label="Forma 36" />
           <FooterLink href="https://nextjs.org/" label="Next.js" />
           <FooterLink href="https://vercel.com/" label="Vercel" />
-          <FooterLink isExternal={false} href="/whats-new" label="What's new" />
         </Flex>
 
         <Flex flexDirection="column" alignItems="flex-start" gap="spacingM">
-          <FooterLink
-            href="https://www.contentful.com/legal/"
-            label="Imprint / Legal"
-          />
-          <FooterLink
-            href="https://www.contentful.com/legal/privacy-at-contentful/privacy-notice/"
-            label="Privacy"
-          />
-          <FooterLink
-            href="https://www.contentful.com/security/"
-            label="Security"
-          />
+          <FooterLink isExternal={false} href="/getting-started/overview" label="Getting started" />
+          <FooterLink isExternal={false} href="/getting-started/frequently-asked-questions" label="FAQ" />
         </Flex>
       </Flex>
 
