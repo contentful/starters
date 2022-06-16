@@ -19,6 +19,8 @@ import reactSVG from "../resources/icons/react-icon.svg";
 import homepageImg from "../public/images/homepage-illustration.svg";
 import { SCREEN_BREAKPOINT_LARGE } from "../utils/getGridStyles";
 import { getAllCategories } from "../lib/api";
+import { Layout } from "../components/Layout";
+import type { SidebarProps } from "../components/Sidebar";
 
 const styles = {
   grid: css({
@@ -43,82 +45,92 @@ const styles = {
   imgContainer: css({ flexGrow: 1, "> span": { flexGrow: 1 } }),
 };
 
-export default function Home() {
+interface IndexPageProps {
+  sidebarLinks: SidebarProps["links"];
+}
+
+export default function Home({ sidebarLinks }) {
   return (
-    <article className={styles.grid}>
-      <Flex
-        justifyContent="space-between"
-        alignItems="flex-start"
-        gap="spacing2Xl"
-      >
-        <Flex flexDirection="column">
-          <Flex
-            flexDirection="column"
-            alignItems="flex-start"
-            marginBottom="spacing3Xl"
-          >
-            <DisplayText as="h1" size="large">
-              Build and extend
-              <br />
-              Contentful products.
-            </DisplayText>
-
-            <Button
-              as="a"
-              href="/introduction/getting-started"
-              variant="primary"
-              size="large"
-              endIcon={<ArrowForwardTrimmedIcon />}
+    <Layout sidebarLinks={sidebarLinks}>
+      <article className={styles.grid}>
+        <Flex
+          justifyContent="space-between"
+          alignItems="flex-start"
+          gap="spacing2Xl"
+        >
+          <Flex flexDirection="column">
+            <Flex
+              flexDirection="column"
+              alignItems="flex-start"
+              marginBottom="spacing3Xl"
             >
-              Get started
-            </Button>
-          </Flex>
+              <DisplayText as="h1" size="large">
+                Build and extend
+                <br />
+                Contentful products.
+              </DisplayText>
 
-          <Flex className={styles.sections} gap="spacing2Xl">
-            <Flex flexDirection="column" alignItems="flex-start">
-              <Image src={figmaSVG} alt="Figma’s logo" />
-
-              <Heading marginTop="spacingM">Figma UI Kit</Heading>
-              <Paragraph>
-                Copy the UI Kit to Figma, publish it as a Team library and start
-                prototyping.
-              </Paragraph>
-              <TextLink
-                href="https://www.figma.com/@contentful"
-                target="_blank"
+              <Button
+                as="a"
+                href="/introduction/getting-started"
+                variant="primary"
+                size="large"
+                endIcon={<ArrowForwardTrimmedIcon />}
               >
-                Get the Figma UI Kit
-              </TextLink>
+                Get started
+              </Button>
             </Flex>
 
-            <Flex flexDirection="column" alignItems="flex-start">
-              <Image src={reactSVG} alt="React’s logo" />
+            <Flex className={styles.sections} gap="spacing2Xl">
+              <Flex flexDirection="column" alignItems="flex-start">
+                <Image src={figmaSVG} alt="Figma’s logo" />
 
-              <Heading marginTop="spacingM">React Components</Heading>
-              <Paragraph>
-                Browse the components and try them out live in the Playground.
-              </Paragraph>
-              <Link href="/components/accordion" passHref>
-                <TextLink>View the components</TextLink>
-              </Link>
+                <Heading marginTop="spacingM">Figma UI Kit</Heading>
+                <Paragraph>
+                  Copy the UI Kit to Figma, publish it as a Team library and
+                  start prototyping.
+                </Paragraph>
+                <TextLink
+                  href="https://www.figma.com/@contentful"
+                  target="_blank"
+                >
+                  Get the Figma UI Kit
+                </TextLink>
+              </Flex>
+
+              <Flex flexDirection="column" alignItems="flex-start">
+                <Image src={reactSVG} alt="React’s logo" />
+
+                <Heading marginTop="spacingM">React Components</Heading>
+                <Paragraph>
+                  Browse the components and try them out live in the Playground.
+                </Paragraph>
+                <Link href="/components/accordion" passHref>
+                  <TextLink>View the components</TextLink>
+                </Link>
+              </Flex>
             </Flex>
           </Flex>
-        </Flex>
 
-        <Flex className={styles.imgContainer}>
-          <Image
-            src={homepageImg}
-            alt="UI components in a browser"
-            layout="responsive"
-          />
+          <Flex className={styles.imgContainer}>
+            <Image
+              src={homepageImg}
+              alt="UI components in a browser"
+              layout="responsive"
+            />
+          </Flex>
         </Flex>
-      </Flex>
-    </article>
+      </article>
+    </Layout>
   );
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  await getAllCategories();
+  const sidebarLinks = await getAllCategories();
 
-  return { props: {} };
+  return {
+    props: {
+      sidebarLinks,
+    },
+  };
 };

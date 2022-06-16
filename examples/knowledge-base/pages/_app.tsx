@@ -2,12 +2,11 @@ import React from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { GlobalStyles as FormaGlobalStyles } from "@contentful/f36-components";
-import { GlobalStyles } from "../components/GlobalStyles";
 import "docsearch.js/dist/cdn/docsearch.min.css";
 
-import { Layout } from "../components/Layout";
+import { GlobalStyles } from "../components/GlobalStyles";
 
-function MyApp({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <FormaGlobalStyles />
@@ -25,11 +24,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/favicon.png" />
       </Head>
 
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
+      <Component {...pageProps} />
     </>
   );
 }
-
-export default MyApp;

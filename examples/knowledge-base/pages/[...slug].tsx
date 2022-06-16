@@ -12,16 +12,24 @@ import { getToCFromContentful } from "../utils/tableOfContents";
 import { FrontMatterContextProvider } from "../utils/frontMatterContext";
 import type { PageContentProps } from "../components/PageContent";
 import { PageContent } from "../components/PageContent";
-import { getAllArticles, getSingleArticleBySlug } from "../lib/api";
+import {
+  getAllCategories,
+  getAllArticles,
+  getSingleArticleBySlug,
+} from "../lib/api";
+import type { SidebarProps } from "../components/Sidebar";
+import { Layout } from "../components/Layout";
 
 interface ComponentPageProps extends PageContentProps {
   propsMetadata?: ReturnType<typeof getPropsMetadata>;
+  sidebarLinks: SidebarProps["links"];
 }
 
 const ComponentPage: NextPage<ComponentPageProps> = ({
   frontMatter,
   headings,
   propsMetadata = {},
+  sidebarLinks,
   source,
 }: ComponentPageProps) => {
   const router = useRouter();
@@ -38,11 +46,13 @@ const ComponentPage: NextPage<ComponentPageProps> = ({
 
       <PropsContextProvider value={{ ...propsMetadata }}>
         <FrontMatterContextProvider value={frontMatter}>
-          <PageContent
-            frontMatter={frontMatter}
-            headings={headings}
-            source={source}
-          />
+          <Layout sidebarLinks={sidebarLinks}>
+            <PageContent
+              frontMatter={frontMatter}
+              headings={headings}
+              source={source}
+            />
+          </Layout>
         </FrontMatterContextProvider>
       </PropsContextProvider>
     </>
@@ -57,6 +67,7 @@ export const getStaticProps: GetStaticProps<
   ComponentPageProps,
   Params
 > = async (context) => {
+  const sidebarLinks = await getAllCategories();
   const entrySlug = context.params?.slug[context.params?.slug.length - 1];
   const contentfulResult = await getSingleArticleBySlug(entrySlug);
 
@@ -72,6 +83,7 @@ export const getStaticProps: GetStaticProps<
       frontMatter: {
         title: contentfulResult.title,
       },
+      sidebarLinks,
       source: {
         richTextBody: contentfulResult.body.json,
         richTextLinks: contentfulResult.body.links,

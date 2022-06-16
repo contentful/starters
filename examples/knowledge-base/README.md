@@ -99,3 +99,5 @@ To deploy your local project to Vercel, push it to GitHub/GitLab/Bitbucket and [
 Log in to Contentful and set up a [webhook](https://app.contentful.com/spaces/<YOUR_SPACE_ID>/settings/webhooks). Webhooks are HTTP callbacks which can be used to send notifications when data in Contentful is changed, allowing external systems to react to changes to do things such as trigger a website rebuild or send a notification to a chat application. This will allow to deploy this website to Vercel every time you will make any changes to your content.
 
 [Read more about webhooks](https://www.contentful.com/developers/docs/concepts/webhooks/) and [Webhook management API](https://www.contentful.com/developers/docs/references/content-management-api/#/reference/webhooks)
+
+## Adding syntax highligting for different programming languages

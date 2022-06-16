@@ -1,9 +1,6 @@
 import React from "react";
-import { css } from "@emotion/core";
-
+import { css, Global } from "@emotion/core";
 import tokens from "@contentful/f36-tokens";
-
-import { Global } from "@emotion/core";
 
 export const GlobalStyles = () => {
   return (

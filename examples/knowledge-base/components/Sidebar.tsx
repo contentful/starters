@@ -5,8 +5,6 @@ import { Grid } from "@contentful/f36-components";
 
 import { SidebarSection } from "./SidebarSection";
 
-const contentfulSidebarLinks = require("../utils/contentfulSidebarLinks.json");
-
 const styles = {
   nav: css({
     padding: `${tokens.spacingM} 0`,
@@ -19,13 +17,12 @@ const styles = {
   }),
 };
 
-interface Props {
+export interface SidebarProps {
   currentPage?: string;
+  links: any[];
 }
 
-export function Sidebar({ currentPage = "/" }: Props) {
-  const links = contentfulSidebarLinks;
-
+export function Sidebar({ currentPage = "/", links }: SidebarProps) {
   return (
     <Grid.Item
       as="nav"

@@ -1,4 +1,7 @@
-import fs from "fs";
+import fs from "node:fs/promises";
+import path from "node:path";
+
+const CACHE_FILE = path.resolve(".sidebarLinks.json");
 
 const ARTICLE_GRAPHQL_FIELDS = `
 sys {
@@ -80,7 +83,6 @@ function extractArticleEntries(fetchResponse) {
 }
 
 export async function getSingleArticleBySlug(slug, preview = false) {
-  console.log("cf fetch ", slug);
   const entry = await fetchGraphQL(
     `query {
       kbAppArticleCollection(where: { slug: "${slug}" }, preview: ${preview}, limit: 1) {
@@ -91,13 +93,23 @@ export async function getSingleArticleBySlug(slug, preview = false) {
     }`,
     preview
   );
-  console.log(entry);
+
   return extractArticle(entry);
 }
 
 export async function getAllCategories(preview = false) {
-  const entries = await fetchGraphQL(
-    `query {
+  let sidebarLinks;
+
+  try {
+    sidebarLinks = JSON.parse(await fs.readFile(CACHE_FILE, "utf8"));
+  } catch (_) {
+    console.log("Cache not initialized");
+    // move on
+  }
+
+  if (!sidebarLinks) {
+    const entries = await fetchGraphQL(
+      `query {
       kbAppCategoryCollection(where: { slug_exists: true }) {
         items {
           slug
@@ -120,40 +132,45 @@ export async function getAllCategories(preview = false) {
         }
       }
     }`,
-    preview
-  );
+      preview
+    );
 
-  const asd = entries?.data?.kbAppCategoryCollection?.items;
+    const data = entries?.data?.kbAppCategoryCollection?.items;
 
-  const sidebarLinks = asd
-    .sort((a, b) => b.name < a.name)
-    .reduce((categories, path) => {
-      // const category = path.kbAppCategory?.slug ?? "unassigned";
+    if (data) {
+      sidebarLinks = data
+        .sort((a, b) => b.name < a.name)
+        .reduce((categories, path) => {
+          // const category = path.kbAppCategory?.slug ?? "unassigned";
 
-      const category = {
-        description: path.previewDescription,
-        links: [],
-        slug: `/${path.slug}`,
-        title: path.name,
-      };
-
-      category.links = path.linkedFrom?.kbAppArticleCollection?.items.map(
-        (article) => {
-          return {
-            slug: `/${path.slug}/${article.slug}`,
-            title: article.title,
+          const category = {
+            description: path.previewDescription,
+            links: [],
+            slug: `/${path.slug}`,
+            title: path.name,
           };
-        }
-      );
 
-      categories.push(category);
+          category.links = path.linkedFrom?.kbAppArticleCollection?.items.map(
+            (article) => {
+              return {
+                slug: `/${path.slug}/${article.slug}`,
+                title: article.title,
+              };
+            }
+          );
 
-      return categories;
-    }, []);
+          categories.push(category);
 
-  // create a JSON file with sidebar links for pages that come from Contentful
-  const data = JSON.stringify(sidebarLinks, null, 2);
-  fs.writeFileSync("utils/contentfulSidebarLinks.json", data);
+          return categories;
+        }, []);
+
+      await fs
+        .writeFile(CACHE_FILE, JSON.stringify(sidebarLinks), "utf8")
+        .catch(() => {});
+    }
+  }
+
+  return sidebarLinks;
 }
 
 export async function getAllArticles(preview = false) {

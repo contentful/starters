@@ -7,6 +7,7 @@ import { getGridStyles, TOPBAR_HEIGHT } from "../utils/getGridStyles";
 import { Topbar } from "./Topbar";
 import { Footer } from "./Footer";
 import { Sidebar } from "./Sidebar";
+import type { SidebarProps } from "./Sidebar";
 
 const styles = {
   mainItem: css({
@@ -19,9 +20,10 @@ const styles = {
 
 interface Props {
   children: React.ReactNode;
+  sidebarLinks: SidebarProps["links"];
 }
 
-export function Layout({ children }: Props) {
+export function Layout({ children, sidebarLinks }: Props) {
   const { currentPage } = useCurrentLocation();
   const gridStyles = getGridStyles();
 
@@ -31,7 +33,7 @@ export function Layout({ children }: Props) {
       columnGap="none"
     >
       <Topbar />
-      <Sidebar currentPage={currentPage} />
+      <Sidebar currentPage={currentPage} links={sidebarLinks} />
 
       {/* Unique key for each page, so scroll position is not preserved when opening a new page */}
       <Grid.Item

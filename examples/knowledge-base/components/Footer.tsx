@@ -1,11 +1,7 @@
 import React from "react";
 import { css, cx } from "emotion";
-import {
-  TextLink,
-  Flex,
-  Text,
-  type TextLinkProps,
-} from "@contentful/f36-components";
+import { TextLink, Flex, Text } from "@contentful/f36-components";
+import type { TextLinkProps } from "@contentful/f36-components";
 import { ExternalLinkIcon } from "@contentful/f36-icons";
 import tokens from "@contentful/f36-tokens";
 
