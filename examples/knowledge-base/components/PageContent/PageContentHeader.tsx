@@ -36,35 +36,18 @@ const styles = {
 
 interface PageContentHeaderProps {
   title: FrontMatter['title'];
-  status?: FrontMatter['status'];
   children?: React.ReactNode;
 }
 
-const getGithubIssueLink = (title) => {
-  const queryParams = {
-    title: `💬  Feedback - ${title}`,
-    assignees: 'm10l,burakukula,mshaaban0,gui-santos,denkristoffer,Lelith',
-    template: 'component-feedback.md',
-  };
-  const queryString = Object.keys(queryParams)
-    .map((key) => `${key}=${queryParams[key]}`)
-    .join('&');
-  return `https://github.com/contentful/forma-36/issues/new?${queryString}`;
-};
-
 export function PageContentHeader({
   title,
-  status,
   children,
 }: PageContentHeaderProps) {
   const gridStyles = getGridStyles();
-  const isDeprecated = status === 'deprecated';
-  const isAlpha = status === 'alpha';
-  const showNote = isAlpha || isDeprecated;
 
   return (
     <header className={cx(gridStyles.contentColumns, styles.header)}>
-      <DisplayText as="h1" marginBottom={showNote ? 'spacingXl' : 'spacingXs'}>
+      <DisplayText as="h1" marginBottom='spacingXs'>
         {title}
       </DisplayText>
 
@@ -76,7 +59,7 @@ export function PageContentHeader({
         alignItems="start"
       >
         <TextLink
-          href={getGithubIssueLink(title)}
+          href='#0'
           target="_blank"
           rel="noopener noreferrer"
           icon={<ExternalLinkIcon />}
@@ -85,23 +68,6 @@ export function PageContentHeader({
           Give feedback
         </TextLink>
       </Flex>
-
-      {isDeprecated && (
-        <Flex flexDirection="column" marginBottom="spacingXl">
-          <Note variant="negative" title="Deprecated component">
-            {title} was deprecated in v4. It will be deleted from the repository
-            on 12th July 2022.
-          </Note>
-        </Flex>
-      )}
-
-      {isAlpha && (
-        <Flex flexDirection="column" marginBottom="spacingXl">
-          <Note variant="positive" title="Alpha component">
-            {title} is not ready to be used in production. Use at your own risk.
-          </Note>
-        </Flex>
-      )}
 
       <Flex flexDirection="column" className={styles.intro}>
         {children}

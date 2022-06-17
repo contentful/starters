@@ -1,1 +1,0 @@
-export { PropertyType } from './PropertyType';

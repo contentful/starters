@@ -1,6 +1,6 @@
 import React from "react";
 import { css, cx } from "emotion";
-import { Flex, Text } from "@contentful/f36-components";
+import { Flex } from "@contentful/f36-components";
 import tokens from "@contentful/f36-tokens";
 
 import type { FrontMatter } from "../../types";
@@ -10,7 +10,6 @@ import {
 } from "../../utils/getGridStyles";
 import { TableOfContent, TableOfContentProps } from "./TableOfContent";
 import { PageContentHeader } from "./PageContentHeader";
-import { PageContentFooter } from "./PageContentFooter";
 import type { RichTextProps } from "../ContentfulRichText";
 import { RichText } from "../ContentfulRichText";
 
@@ -64,7 +63,7 @@ export function PageContent({
   source,
 }: PageContentProps) {
   const gridStyles = getGridStyles();
-  const { title, github, status } = frontMatter;
+  const { title } = frontMatter;
 
   return (
     <div
@@ -74,7 +73,7 @@ export function PageContent({
         gridStyles.contentColumnsBigScreens
       )}
     >
-      <PageContentHeader title={title} status={status} />
+      <PageContentHeader title={title} />
 
       <Flex flexDirection="column" className={styles.content}>
         {/**
@@ -92,7 +91,6 @@ export function PageContent({
             />
           )}
         </article>
-        <PageContentFooter github={github} />
       </Flex>
 
       {headings.length > 1 && (
