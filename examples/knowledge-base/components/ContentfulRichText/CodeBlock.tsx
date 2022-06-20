@@ -4,7 +4,8 @@ import Highlight, {
   defaultProps as HighlightDefaultProps,
   Language,
 } from "prism-react-renderer";
-import { theme } from "./theme";
+import githubTheme from 'prism-react-renderer/themes/github';
+
 import { cx, css } from "emotion";
 import tokens from "@contentful/f36-tokens";
 
@@ -16,18 +17,18 @@ const styles = {
   }),
 };
 
-interface StaticSourceProps {
+interface CodeBlockProps {
   children: string;
   className: string;
 }
 
-export function StaticSource({ children, ...otherProps }: StaticSourceProps) {
+export function CodeBlock({ children, ...otherProps }: CodeBlockProps) {
   const language = otherProps.className.replace("language-", "");
 
   return (
     <Highlight
       {...HighlightDefaultProps}
-      theme={theme}
+      theme={githubTheme}
       code={children?.trim() ?? ""}
       language={language as Language}
     >
