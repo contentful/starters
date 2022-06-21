@@ -1,6 +1,6 @@
 import React from "react";
 import { css, cx } from "emotion";
-import { Grid, Flex } from "@contentful/f36-components";
+import { Grid, Flex, GRID_DEFAULT_TAG } from "@contentful/f36-components";
 import tokens from "@contentful/f36-tokens";
 
 import {
@@ -9,6 +9,7 @@ import {
   SCREEN_BREAKPOINT_LARGE,
 } from "../../utils/getGridStyles";
 import { TopbarLogo } from "./TopbarLogo";
+import { SeachBox } from "../SearchBox/SearchBox";
 
 const styles = {
   header: css({
@@ -27,12 +28,18 @@ const styles = {
       fontSize: tokens.fontSizeL,
     },
   }),
+  searchBox: css({
+    gridColumn: 2,
+    [`@media screen and (min-width: ${SCREEN_BREAKPOINT_LARGE})`]: {
+      gridColumnStart: 4,
+    }
+  })
 };
 
 export function Topbar() {
   const gridStyles = getGridStyles();
 
-  return (
+  return (<>
     <Grid.Item
       as="header"
       area="topbar"
@@ -41,6 +48,20 @@ export function Topbar() {
       <Flex paddingLeft="spacingXl">
         <TopbarLogo />
       </Flex>
+
+      <Flex
+        justifyContent="space-between"
+        alignItems="center"
+        className={cx(
+          gridStyles.contentColumns,
+          gridStyles.contentColumnsBigScreens,
+        )}
+      >
+        <Flex className={cx(styles.searchBox)}>
+          <SeachBox />
+        </Flex>
+      </Flex>
     </Grid.Item>
+    </>
   );
 }
