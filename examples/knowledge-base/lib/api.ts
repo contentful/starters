@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import fetch from "isomorphic-unfetch";
 
 const CACHE_FILE = path.resolve(".sidebarLinks.json");
 
@@ -141,8 +142,6 @@ export async function getAllCategories(preview = false) {
       sidebarLinks = data
         .sort((a, b) => b.name < a.name)
         .reduce((categories, path) => {
-          // const category = path.kbAppCategory?.slug ?? "unassigned";
-
           const category = {
             description: path.previewDescription,
             links: [],
@@ -178,10 +177,11 @@ export async function getAllArticles(preview = false) {
     `query {
       kbAppArticleCollection(where: { slug_exists: true }) {
         items {
-          slug
           sys {
             id
           }
+          slug
+          title
           kbAppCategory {
             sys {
               id

@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://f36.contentful.com
+Host: https://YOUR_WEBSITE_DOMAIN
 
 # Sitemaps
-Sitemap: https://f36.contentful.com/sitemap.xml
+Sitemap: https://YOUR_WEBSITE_DOMAIN/sitemap.xml
