@@ -28,7 +28,7 @@ const styles = {
 };
 
 export const SeachBox = () => {
-  const [results, seresultTypes] = useState<resultType[]>([]);
+  const [results, setResults] = useState<resultType[]>([]);
   const router = useRouter();
 
   const idx = lunr(function(builder) {
@@ -42,15 +42,33 @@ export const SeachBox = () => {
     })
   });
 
+  const truncateContent = (found, page) => {
+    if(!found || !page) return page;
+    const key = Object.keys(found?.matchData?.metadata).find(key => {
+      console.log(found.matchData.metadata[key])
+      return found.matchData.metadata[key].content?.position
+    });
+    if(!key) return page;
+    const [index] = found.matchData.metadata[key].content.position[0];
+    const startIndex = Math.max(0, index - 15)
+    const truncatedContent = page.content.substring(startIndex, 50);
+    return {
+      ...page,
+      content: startIndex > 0 ? `…${truncatedContent}` : truncatedContent,
+    }
+  }
+
   const handleInputValueChange = (value) => {
     if(value.length < 3) {
-      seresultTypes([]);
+      setResults([]);
       return;
     }
     const found = idx.search(value);
+    const matches = found
+      .map(f => pages.find(page => page.url === f.ref))
+      .map((page, index) => truncateContent(found[index], page))
 
-    const matches = found.map(f => pages.find(page => page.url === f.ref));
-    seresultTypes(matches);
+    setResults(matches);
   };
 
   const handleSelectItem = (item: resultType) => {
