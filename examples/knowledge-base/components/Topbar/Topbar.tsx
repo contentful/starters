@@ -1,6 +1,6 @@
 import React from "react";
 import { css, cx } from "emotion";
-import { Grid, Flex, GRID_DEFAULT_TAG } from "@contentful/f36-components";
+import { Grid, Flex } from "@contentful/f36-components";
 import tokens from "@contentful/f36-tokens";
 
 import {
@@ -31,7 +31,7 @@ const styles = {
   searchBox: css({
     gridColumn: 2,
     [`@media screen and (min-width: ${SCREEN_BREAKPOINT_LARGE})`]: {
-      gridColumnStart: 4,
+      gridColumnStart: 2,
     }
   })
 };
@@ -39,7 +39,7 @@ const styles = {
 export function Topbar() {
   const gridStyles = getGridStyles();
 
-  return (<>
+  return (
     <Grid.Item
       as="header"
       area="topbar"
@@ -62,6 +62,5 @@ export function Topbar() {
         </Flex>
       </Flex>
     </Grid.Item>
-    </>
   );
 }
