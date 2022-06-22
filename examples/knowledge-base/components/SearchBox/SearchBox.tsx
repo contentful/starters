@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import { Autocomplete, Text, Flex } from "@contentful/f36-components";
-import lunr from "lunr";
 import { css } from "emotion";
-import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 
 import { ResultType } from "./types";
 
