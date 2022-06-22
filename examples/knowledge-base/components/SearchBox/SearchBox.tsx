@@ -3,6 +3,8 @@ import { useRouter } from "next/router";
 import { Autocomplete, Text, Flex } from "@contentful/f36-components";
 import lunr from "lunr";
 import { css } from "emotion";
+import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
+
 import { ResultType } from "./types";
 
 const styles = {
@@ -13,57 +15,28 @@ const styles = {
   }),
 };
 
-const truncateContent = (found: lunr.Index.Result) => {
-  const key = Object.keys(found.matchData?.metadata).find((key) => {
-    console.log(found.matchData.metadata[key]);
-    return found.matchData.metadata[key].content?.position;
-  });
-
-  debugger;
-  // if (!key) return page;
-
-  const [index] = found.matchData.metadata[key].content.position[0];
-  const startIndex = Math.max(0, index - 15);
-  const truncatedContent = page.content.substring(startIndex, 50);
-  return {
-    content: startIndex > 0 ? `…${truncatedContent}` : truncatedContent,
-  };
-};
-
 export const SearchBox = () => {
   const [results, setResults] = useState<ResultType[]>([]);
-  const [searchIndex, setSearchIndex] = useState<lunr.Index | undefined>();
   const router = useRouter();
 
-  useEffect(() => {
-    async function fetchSearchIndex() {
-      const response = await fetch("/api/search");
-      const data = await response.json();
-      console.dir(data);
-
-      const index = lunr.Index.load(data);
-
-      setSearchIndex(index);
-    }
-
-    fetchSearchIndex();
-  }, []);
-
-  const handleInputValueChange = (value) => {
-    if (!value.length || !searchIndex) {
+  const handleInputValueChange = async (value) => {
+    if (!value.length) {
       setResults([]);
       return;
     }
-    const found = searchIndex.search(value);
-    const matches = found.map(truncateContent);
-    // .map((f) => pages.find((page) => page.url === f.ref))
-    // .map((page, index) => truncateContent(found[index], page));
+
+    const response = await fetch("/api/search", {
+      method: "POST",
+      body: JSON.stringify({ query: value }),
+    });
+    const matches = await response.json();
 
     setResults(matches);
   };
 
   const handleSelectItem = (item: ResultType) => {
-    router.push(item.url);
+    console.log(item);
+    router.push(item.slug);
   };
 
   const renderResult = (result: ResultType) => (
@@ -80,9 +53,8 @@ export const SearchBox = () => {
         fontSize="fontSizeS"
         lineHeight="lineHeightS"
         className={styles.searchResults}
-      >
-        {result.content}
-      </Text>
+        dangerouslySetInnerHTML={{ __html: result.content }}
+      />
     </Flex>
   );
 
@@ -94,7 +66,7 @@ export const SearchBox = () => {
       onInputValueChange={handleInputValueChange}
       renderItem={renderResult}
       listWidth="full"
-      isLoading={typeof searchIndex === "undefined"}
+      // isLoading={}
     />
   );
 };

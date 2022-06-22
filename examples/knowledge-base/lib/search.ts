@@ -6,20 +6,21 @@ import { getAllArticles, getSingleArticleBySlug } from "./api";
 interface SearchDocument {
   content: string;
   title: string;
-  url: string;
+  slug: string;
 }
 
 function createIndex(documents: SearchDocument[]) {
   return new Promise<lunr.Index>(function (resolve, reject) {
     try {
-      const index = lunr(function () {
-        this.ref("title");
-        this.field("content");
-        this.field("url");
+      const index = lunr(function (builder) {
+        builder.ref("slug");
+        builder.field("title");
+        builder.field("content");
+        builder.metadataWhitelist = ["position", "content"];
 
-        documents.forEach((doc) => {
-          this.add(doc);
-        }, this);
+        documents.forEach((document) => {
+          builder.add(document);
+        });
       });
 
       resolve(index);
@@ -42,7 +43,7 @@ export async function buildSearchIndex() {
       {
         title: article.title,
         content: text,
-        url: `/${article.kbAppCategory.slug}/${article.slug}`,
+        slug: article.slug,
       },
     ];
   }
