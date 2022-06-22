@@ -40,6 +40,7 @@ export const SearchBox = () => {
 
   const renderResult = (result: ResultType) => {
     const getContent = (content: string) => {
+      if(!content) return null;
       const queryRegexp = new RegExp(query, 'i');
       const startIndex = content.search(queryRegexp);
       return [
