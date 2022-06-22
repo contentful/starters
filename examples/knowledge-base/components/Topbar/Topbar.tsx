@@ -29,7 +29,7 @@ const styles = {
     },
   }),
   searchBox: css({
-    gridColumn: 2,
+    gridColumn: 1,
     [`@media screen and (min-width: ${SCREEN_BREAKPOINT_LARGE})`]: {
       gridColumnStart: 2,
     },
