@@ -26,7 +26,7 @@ const truncateContent = async (found: lunr.Index.Result) => {
   const truncatedContent = text.slice(startIndex, startIndex + length + 50);
   let content;
 
-  if (truncatedContent.length < text.length) {
+  if (startIndex + length + 50 < text.length) {
     content = `${truncatedContent}…`;
   }
 
