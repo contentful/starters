@@ -1,5 +1,5 @@
 export type ResultType = {
-  url: string
-  title: string
-  content: string
-}
+  slug: string;
+  title: string;
+  content: string;
+};

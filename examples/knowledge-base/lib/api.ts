@@ -1,5 +1,9 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import fetch from "isomorphic-unfetch";
+import dotenv from "dotenv-flow";
+
+dotenv.config();
 
 const CACHE_FILE = path.resolve(".sidebarLinks.json");
 
@@ -182,6 +186,7 @@ export async function getAllArticles(preview = false) {
           sys {
             id
           }
+          title
           kbAppCategory {
             sys {
               id
