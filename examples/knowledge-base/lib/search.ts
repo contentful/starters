@@ -16,7 +16,7 @@ function createIndex(documents: SearchDocument[]) {
         builder.ref("slug");
         builder.field("title");
         builder.field("content");
-        builder.metadataWhitelist = ["position", "content"];
+        builder.metadataWhitelist = ["position"];
 
         documents.forEach((document) => {
           builder.add(document);
