@@ -33,7 +33,6 @@ export const SearchBox = () => {
   };
 
   const handleSelectItem = (item: ResultType) => {
-    console.log(item);
     router.push(item.slug);
   };
 
