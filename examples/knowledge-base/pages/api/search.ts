@@ -46,25 +46,25 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { query } = JSON.parse(req.body);
-  let index: lunr.Index;
+  let indexToLoad: lunr.Index;
 
   try {
     const serializedIndex = await fs.readFile("searchIndex.json", {
       encoding: "utf-8",
     });
-    index = JSON.parse(serializedIndex);
+    indexToLoad = JSON.parse(serializedIndex);
   } catch (error) {
     // Recreate index
-    index = await buildSearchIndex();
-    const serializedIndex = JSON.stringify(index);
+    indexToLoad = await buildSearchIndex();
+    const serializedIndex = JSON.stringify(indexToLoad);
 
     await fs.writeFile("searchIndex.json", serializedIndex, {
       encoding: "utf-8",
     });
   }
 
-  const asdf = lunr.Index.load(index);
-  const found = asdf.search(`${query}*`);
+  const index = lunr.Index.load(indexToLoad);
+  const found = index.search(`${query}*`);
   let matches: any[] = [];
 
   for (const result of found) {
