@@ -50,8 +50,9 @@ export const SearchBox = () => {
         fontSize="fontSizeS"
         lineHeight="lineHeightS"
         className={styles.searchResults}
-        dangerouslySetInnerHTML={{ __html: result.content }}
-      />
+      >
+        {result.content}
+      </Text>
     </Flex>
   );
 
