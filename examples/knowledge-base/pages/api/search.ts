@@ -1,57 +1,26 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
-import lunr from "lunr";
-
-import { getAllArticles, getSingleArticleBySlug } from "../../lib/api";
-
-interface Document {
-  content: string;
-  title: string;
-  url: string;
-}
-
-function createIndex(documents: Document[]) {
-  return new Promise<lunr.Index>(function (resolve, reject) {
-    try {
-      const index = lunr(function () {
-        this.ref("title");
-        this.field("content");
-        this.field("url");
-
-        documents.forEach((doc) => {
-          this.add(doc);
-        }, this);
-      });
-
-      resolve(index);
-    } catch (error) {
-      reject(error);
-    }
-  });
-}
+import fs from "node:fs/promises";
+import { buildSearchIndex } from "../../lib/search";
 
 export default async function handler(
   _req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const allArticles = await getAllArticles();
-  let documents: Document[] = [];
+  let index: string = "";
 
-  for (const article of allArticles) {
-    const contentfulResult = await getSingleArticleBySlug(article.slug);
-    const text = documentToPlainTextString(contentfulResult.body.json);
+  try {
+    index = await fs.readFile("searchIndex.json", {
+      encoding: "utf-8",
+    });
+  } catch (error) {
+    // Recreate index
+    const newIndex = await buildSearchIndex();
+    index = JSON.stringify(newIndex);
 
-    documents = [
-      ...documents,
-      {
-        title: article.title,
-        content: text,
-        url: `/${article.kbAppCategory.slug}/${article.slug}`,
-      },
-    ];
+    await fs.writeFile("searchIndex.json", index, {
+      encoding: "utf-8",
+    });
   }
 
-  const index = await createIndex(documents);
-
-  res.status(200).send(index.toJSON());
+  res.status(200).send(index);
 }

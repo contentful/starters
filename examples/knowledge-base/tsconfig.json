@@ -1,4 +1,9 @@
 {
+  "ts-node": {
+    "compilerOptions": {
+      "module": "node16"
+    }
+  },
   "compilerOptions": {
     // we can explicitly declare `any`, but we don't want to infer `any`
     "noImplicitAny": false,

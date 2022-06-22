@@ -13,18 +13,19 @@ const styles = {
   }),
 };
 
-const truncateContent = (found, page) => {
-  if (!found || !page) return page;
-  const key = Object.keys(found?.matchData?.metadata).find((key) => {
+const truncateContent = (found: lunr.Index.Result) => {
+  const key = Object.keys(found.matchData?.metadata).find((key) => {
     console.log(found.matchData.metadata[key]);
     return found.matchData.metadata[key].content?.position;
   });
-  if (!key) return page;
+
+  debugger;
+  // if (!key) return page;
+
   const [index] = found.matchData.metadata[key].content.position[0];
   const startIndex = Math.max(0, index - 15);
   const truncatedContent = page.content.substring(startIndex, 50);
   return {
-    ...page,
     content: startIndex > 0 ? `…${truncatedContent}` : truncatedContent,
   };
 };
@@ -38,6 +39,8 @@ export const SearchBox = () => {
     async function fetchSearchIndex() {
       const response = await fetch("/api/search");
       const data = await response.json();
+      console.dir(data);
+
       const index = lunr.Index.load(data);
 
       setSearchIndex(index);
@@ -52,9 +55,9 @@ export const SearchBox = () => {
       return;
     }
     const found = searchIndex.search(value);
-    const matches = found
-      // .map((f) => pages.find((page) => page.url === f.ref))
-      .map((page, index) => truncateContent(found[index], page));
+    const matches = found.map(truncateContent);
+    // .map((f) => pages.find((page) => page.url === f.ref))
+    // .map((page, index) => truncateContent(found[index], page));
 
     setResults(matches);
   };
