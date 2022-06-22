@@ -24,7 +24,7 @@ const truncateContent = async (found: lunr.Index.Result) => {
   const [index, length] = found.matchData.metadata[key].content.position[0];
   const startIndex = Math.max(0, index - 15);
   const truncatedContent = text.slice(startIndex, startIndex + length + 50);
-  let content;
+  let content = truncatedContent;
 
   if (startIndex + length + 50 < text.length) {
     content = `${truncatedContent}…`;
