@@ -9,7 +9,7 @@ import {
   SCREEN_BREAKPOINT_LARGE,
 } from "../../utils/getGridStyles";
 import { TopbarLogo } from "./TopbarLogo";
-import { SeachBox } from "../SearchBox/SearchBox";
+import { SearchBox } from "../SearchBox/SearchBox";
 
 const styles = {
   header: css({
@@ -29,7 +29,7 @@ const styles = {
     },
   }),
   searchBox: css({
-    gridColumn: 2,
+    gridColumn: 1,
     [`@media screen and (min-width: ${SCREEN_BREAKPOINT_LARGE})`]: {
       gridColumnStart: 2,
     }
@@ -58,7 +58,7 @@ export function Topbar() {
         )}
       >
         <Flex className={cx(styles.searchBox)}>
-          <SeachBox />
+          <SearchBox />
         </Flex>
       </Flex>
     </Grid.Item>

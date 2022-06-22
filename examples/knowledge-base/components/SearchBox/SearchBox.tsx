@@ -30,7 +30,6 @@ const styles = {
 const truncateContent = (found, page) => {
   if(!found || !page) return page;
   const key = Object.keys(found?.matchData?.metadata).find(key => {
-    console.log(found.matchData.metadata[key])
     return found.matchData.metadata[key].content?.position
   });
   if(!key) return page;
@@ -43,7 +42,7 @@ const truncateContent = (found, page) => {
   }
 }
 
-export const SeachBox = () => {
+export const SearchBox = () => {
   const [results, setResults] = useState<ResultType[]>([]);
   const router = useRouter();
 
