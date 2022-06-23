@@ -34,4 +34,4 @@ yarn-error.log*
 .vercel
 
 # local cache
-.sidebarLinks.json
+.cache/*.json
