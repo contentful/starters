@@ -1,8 +1,5 @@
-import dotenv from "dotenv";
 import { writeFileSync } from "node:fs";
 import prettier from "prettier";
-
-dotenv.config();
 
 const deploymentUrl =
   process.env.PRODUCTION_URL || process.env.VERCEL_URL || "YOUR_WEBSITE_DOMAIN";

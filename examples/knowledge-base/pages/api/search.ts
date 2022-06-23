@@ -4,9 +4,6 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { tmpdir } from "node:os";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
-import dotenv from "dotenv-flow";
-
-dotenv.config();
 
 import { buildSearchIndex } from "../../lib/search";
 import { getSingleArticleBySlug } from "../../lib/api";
@@ -65,10 +62,6 @@ export default async function handler(
       encoding: "utf-8",
     });
   }
-
-  console.log("find me");
-  console.dir(indexToLoad);
-  console.log("---");
 
   const index = lunr.Index.load(indexToLoad);
   const found = index.search(`${query}*`);

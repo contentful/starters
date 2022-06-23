@@ -19,7 +19,6 @@
     "@contentful/rich-text-plain-text-renderer": "^15.12.1",
     "@contentful/rich-text-react-renderer": "^15.11.1",
     "@emotion/core": "^10.0.17",
-    "dotenv-flow": "^3.2.0",
     "emotion": "^10.0.17",
     "emotion-server": "^10.0.17",
     "github-slugger": "^1.4.0",
