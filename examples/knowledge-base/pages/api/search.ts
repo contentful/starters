@@ -1,7 +1,7 @@
 import lunr from "lunr";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { readdirSync, readFileSync, writeFileSync } from "node:fs";
-import path from "node:path";
+import { readdirSync, readFileSync, writeFileSync } from "fs";
+import path from "path";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 
 import { buildSearchIndex } from "../../lib/search";
@@ -72,8 +72,6 @@ export default async function handler(
       writeFileSync(indexFile, serializedIndex, "utf-8");
     }
   }
-
-  console.log({ indexToLoad });
 
   if (!indexToLoad) {
     throw new Error("Failed to load search index file");
