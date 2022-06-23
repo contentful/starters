@@ -1,6 +1,7 @@
 import lunr from "lunr";
 import type { NextApiRequest, NextApiResponse } from "next";
 import fs from "node:fs/promises";
+import path from "node:path";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import dotenv from "dotenv-flow";
 
@@ -41,6 +42,8 @@ const truncateContent = async (found: lunr.Index.Result) => {
   };
 };
 
+const searchIndex = path.join(process.cwd(), "public/searchIndex.json");
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
@@ -49,7 +52,7 @@ export default async function handler(
   let indexToLoad: lunr.Index;
 
   try {
-    const serializedIndex = await fs.readFile("searchIndex.json", {
+    const serializedIndex = await fs.readFile(searchIndex, {
       encoding: "utf-8",
     });
     indexToLoad = JSON.parse(serializedIndex);
@@ -58,7 +61,7 @@ export default async function handler(
     indexToLoad = await buildSearchIndex();
     const serializedIndex = JSON.stringify(indexToLoad);
 
-    await fs.writeFile("searchIndex.json", serializedIndex, {
+    await fs.writeFile(searchIndex, serializedIndex, {
       encoding: "utf-8",
     });
   }

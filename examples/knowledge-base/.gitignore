@@ -34,7 +34,7 @@ yarn-error.log*
 .vercel
 
 # local search index file
-searchIndex.json
+public/searchIndex.json
 
 # local cache
 .sidebarLinks.json
