@@ -1,5 +1,7 @@
-"functions": {
-  "api/test.js": {
-    "includeFiles": "public/json/**"
+{
+  "functions": {
+    "api/test.js": {
+      "includeFiles": "public/json/**"
+    }
   }
 }
