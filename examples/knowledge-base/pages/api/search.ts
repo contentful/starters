@@ -44,9 +44,14 @@ export default async function handler(
 ) {
   const { query } = JSON.parse(req.body);
   let indexToLoad: lunr.Index | undefined = undefined;
-  let indexPath = path.resolve("./public");
+  let indexPath =
+    process.env.NODE_ENV === "development"
+      ? path.resolve("./public")
+      : process.cwd(); //path.resolve("/", '.');
 
   // indexPath = path.join(process.cwd(), "public");
+
+  console.log({ indexPath });
 
   try {
     const serializedIndex = await fs.readFile(
