@@ -5,6 +5,7 @@ import tokens from "@contentful/f36-tokens";
 
 import {
   getGridStyles,
+  SCREEN_BREAKPOINT_LARGE,
   TOPBAR_HEIGHT,
 } from "../../utils/getGridStyles";
 import { TopbarLogo } from "./TopbarLogo";
