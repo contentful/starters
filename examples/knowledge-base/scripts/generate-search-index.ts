@@ -7,9 +7,11 @@ async function run() {
   const index = await buildSearchIndex();
   const serializedIndex = JSON.stringify(index);
 
-  await fs.writeFile(path.join('public', 'json', "searchIndex.json"), serializedIndex, {
-    encoding: "utf-8",
-  });
+  await fs.writeFile(
+    path.join(process.cwd(), "public", "searchIndex.json"),
+    serializedIndex,
+    "utf-8"
+  );
 }
 
 run();
