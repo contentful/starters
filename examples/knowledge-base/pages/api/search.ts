@@ -1,6 +1,6 @@
 import lunr from "lunr";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { readFileSync, writeFileSync } from "fs";
+import { readFile, writeFile } from "fs/promises";
 import path from "path";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 
@@ -50,17 +50,15 @@ export default async function handler(
       : path.resolve(process.cwd(), "public/json/searchIndex.json");
 
   try {
-    const serializedIndex = readFileSync(indexFile, "utf-8");
+    const serializedIndex = await readFile(indexFile, "utf-8");
     indexToLoad = JSON.parse(serializedIndex) as lunr.Index;
   } catch (error) {
-    console.log({ error });
-
     // Recreate index for local development
     if (process.env.NODE_ENV === "development") {
       indexToLoad = await buildSearchIndex();
       const serializedIndex = JSON.stringify(indexToLoad);
 
-      writeFileSync(indexFile, serializedIndex, "utf-8");
+      await writeFile(indexFile, serializedIndex, "utf-8");
     }
   }
 
