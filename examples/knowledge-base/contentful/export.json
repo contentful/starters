@@ -38,7 +38,7 @@
           }
         },
         "publishedCounter": 3,
-        "version": 7,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -207,7 +207,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 3,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -305,7 +305,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 3,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -380,7 +380,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 3,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -539,7 +539,7 @@
           }
         },
         "publishedCounter": 10,
-        "version": 20,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -614,7 +614,7 @@
             "linkType": "Space"
           }
         },
-        "version": 6,
+        "version": 1,
         "createdAt": "2022-06-10T10:34:17.690Z",
         "createdBy": {
           "sys": {
@@ -711,7 +711,7 @@
             "linkType": "Space"
           }
         },
-        "version": 2,
+        "version": 1,
         "createdAt": "2022-06-10T10:34:17.635Z",
         "createdBy": {
           "sys": {
@@ -792,7 +792,7 @@
             "linkType": "Space"
           }
         },
-        "version": 2,
+        "version": 1,
         "createdAt": "2022-06-10T10:34:18.037Z",
         "createdBy": {
           "sys": {
@@ -870,7 +870,7 @@
             "linkType": "Space"
           }
         },
-        "version": 2,
+        "version": 1,
         "createdAt": "2022-06-10T10:34:18.125Z",
         "createdBy": {
           "sys": {
@@ -963,7 +963,7 @@
             "linkType": "Space"
           }
         },
-        "version": 20,
+        "version": 1,
         "createdAt": "2022-06-13T09:59:39.285Z",
         "createdBy": {
           "sys": {
@@ -1057,7 +1057,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 2,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -1127,7 +1127,7 @@
           }
         },
         "publishedCounter": 2,
-        "version": 16,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -1593,7 +1593,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 2,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -1660,7 +1660,7 @@
           }
         },
         "publishedCounter": 2,
-        "version": 5,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -1730,7 +1730,7 @@
           }
         },
         "publishedCounter": 2,
-        "version": 50,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -2690,7 +2690,7 @@
           }
         },
         "publishedCounter": 2,
-        "version": 7,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -3018,7 +3018,7 @@
           }
         },
         "publishedCounter": 2,
-        "version": 5,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -3859,7 +3859,7 @@
           }
         },
         "publishedCounter": 2,
-        "version": 4,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -4016,7 +4016,7 @@
           }
         },
         "publishedCounter": 3,
-        "version": 22,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -4207,7 +4207,7 @@
           }
         },
         "publishedCounter": 4,
-        "version": 14,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -4277,7 +4277,7 @@
           }
         },
         "publishedCounter": 8,
-        "version": 65,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -4815,7 +4815,7 @@
           }
         },
         "publishedCounter": 4,
-        "version": 19,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -4887,7 +4887,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 3,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -4958,7 +4958,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 3,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -5029,7 +5029,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 3,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -5100,7 +5100,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 3,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
@@ -5171,7 +5171,7 @@
           }
         },
         "publishedCounter": 1,
-        "version": 3,
+        "version": 1,
         "publishedBy": {
           "sys": {
             "type": "Link",
