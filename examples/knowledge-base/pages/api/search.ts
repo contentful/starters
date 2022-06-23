@@ -67,6 +67,10 @@ export default async function handler(
     });
   }
 
+  console.log("find me");
+  console.dir(indexToLoad);
+  console.log("---");
+
   const index = lunr.Index.load(indexToLoad);
   const found = index.search(`${query}*`);
   let matches: any[] = [];
