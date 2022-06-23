@@ -12,7 +12,7 @@ import {
 import { BLOCKS, INLINES } from "@contentful/rich-text-types";
 import type { Block, Inline, Text } from "@contentful/rich-text-types";
 import type { RenderNode } from "@contentful/rich-text-react-renderer";
-import { StaticSource } from "../LiveEditor/StaticSource";
+import { CodeBlock } from "./CodeBlock";
 
 const getHeadingId = (node: Block | Inline) =>
   slugger.slug((node.content[0] as Text).value, false);
@@ -95,7 +95,7 @@ export function getRenderNode(links): RenderNode {
     [BLOCKS.EMBEDDED_ENTRY]: (node) => {
       const entry = entryMap.get(node.data.target.sys.id);
       return (
-        <StaticSource
+        <CodeBlock
           children={entry.code}
           className={`language-${entry.language ?? "jsx"}`}
         />

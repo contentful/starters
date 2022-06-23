@@ -5,9 +5,7 @@ import type { ParsedUrlQuery } from "querystring";
 import { useRouter } from "next/router";
 import ErrorPage from "next/error";
 import Head from "next/head";
-import { PropsContextProvider } from "../components/PropsTable";
 
-import { getPropsMetadata } from "../utils/propsMeta";
 import { getToCFromContentful } from "../utils/tableOfContents";
 import { FrontMatterContextProvider } from "../utils/frontMatterContext";
 import type { PageContentProps } from "../components/PageContent";
@@ -21,14 +19,12 @@ import type { SidebarProps } from "../components/Sidebar";
 import { Layout } from "../components/Layout";
 
 interface ComponentPageProps extends PageContentProps {
-  propsMetadata?: ReturnType<typeof getPropsMetadata>;
   sidebarLinks: SidebarProps["links"];
 }
 
 const ComponentPage: NextPage<ComponentPageProps> = ({
   frontMatter,
   headings,
-  propsMetadata = {},
   sidebarLinks,
   source,
 }: ComponentPageProps) => {
@@ -44,7 +40,6 @@ const ComponentPage: NextPage<ComponentPageProps> = ({
         <title>{frontMatter.title}</title>
       </Head>
 
-      <PropsContextProvider value={{ ...propsMetadata }}>
         <FrontMatterContextProvider value={frontMatter}>
           <Layout sidebarLinks={sidebarLinks}>
             <PageContent
@@ -54,7 +49,6 @@ const ComponentPage: NextPage<ComponentPageProps> = ({
             />
           </Layout>
         </FrontMatterContextProvider>
-      </PropsContextProvider>
     </>
   );
 };

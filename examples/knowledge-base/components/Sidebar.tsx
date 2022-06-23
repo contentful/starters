@@ -4,6 +4,7 @@ import tokens from "@contentful/f36-tokens";
 import { Grid } from "@contentful/f36-components";
 
 import { SidebarSection } from "./SidebarSection";
+import { useRouter } from "next/router";
 
 const styles = {
   nav: css({
@@ -18,11 +19,12 @@ const styles = {
 };
 
 export interface SidebarProps {
-  currentPage?: string;
   links: any[];
 }
 
-export function Sidebar({ currentPage = "/", links }: SidebarProps) {
+export function Sidebar({ links }: SidebarProps) {
+  const { asPath: currentPage } = useRouter();
+
   return (
     <Grid.Item
       as="nav"
