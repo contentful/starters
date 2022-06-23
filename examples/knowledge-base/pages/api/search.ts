@@ -1,6 +1,6 @@
 import lunr from "lunr";
 import type { NextApiRequest, NextApiResponse } from "next";
-import fs from "node:fs/promises";
+import { readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 
@@ -52,7 +52,7 @@ export default async function handler(
   console.log({ indexFile });
 
   try {
-    const serializedIndex = await fs.readFile(indexFile, "utf-8");
+    const serializedIndex = readFileSync(indexFile, "utf-8");
     indexToLoad = JSON.parse(serializedIndex) as lunr.Index;
   } catch (error) {
     console.log({ error });
@@ -62,7 +62,7 @@ export default async function handler(
       indexToLoad = await buildSearchIndex();
       const serializedIndex = JSON.stringify(indexToLoad);
 
-      await fs.writeFile(indexFile, serializedIndex, "utf-8");
+      writeFileSync(indexFile, serializedIndex, "utf-8");
     }
   }
 
