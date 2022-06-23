@@ -14,6 +14,7 @@ import {
   getAllCategories,
   getAllArticles,
   getSingleArticleBySlug,
+  getSiteSettings,
 } from "../lib/api";
 import type { SidebarProps } from "../components/Sidebar";
 import { Layout } from "../components/Layout";
@@ -40,15 +41,15 @@ const ComponentPage: NextPage<ComponentPageProps> = ({
         <title>{frontMatter.title}</title>
       </Head>
 
-        <FrontMatterContextProvider value={frontMatter}>
-          <Layout sidebarLinks={sidebarLinks}>
-            <PageContent
-              frontMatter={frontMatter}
-              headings={headings}
-              source={source}
-            />
-          </Layout>
-        </FrontMatterContextProvider>
+      <FrontMatterContextProvider value={frontMatter}>
+        <Layout sidebarLinks={sidebarLinks}>
+          <PageContent
+            frontMatter={frontMatter}
+            headings={headings}
+            source={source}
+          />
+        </Layout>
+      </FrontMatterContextProvider>
     </>
   );
 };
@@ -62,6 +63,7 @@ export const getStaticProps: GetStaticProps<
   Params
 > = async (context) => {
   const sidebarLinks = await getAllCategories();
+  const siteSettings = await getSiteSettings();
   const entrySlug = context.params?.slug[context.params?.slug.length - 1];
   const contentfulResult = await getSingleArticleBySlug(entrySlug);
 
@@ -78,6 +80,7 @@ export const getStaticProps: GetStaticProps<
         title: contentfulResult.title,
       },
       sidebarLinks,
+      siteSettings,
       source: {
         richTextBody: contentfulResult.body.json,
         richTextLinks: contentfulResult.body.links,

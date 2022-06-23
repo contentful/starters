@@ -4,22 +4,19 @@ import Head from "next/head";
 import { GlobalStyles as FormaGlobalStyles } from "@contentful/f36-components";
 
 import { GlobalStyles } from "../components/GlobalStyles";
+import { SiteSettings } from "../types";
 
 export default function App({ Component, pageProps }: AppProps) {
+  const siteSettings: SiteSettings = pageProps.siteSettings || {};
+
   return (
     <>
       <FormaGlobalStyles />
       <GlobalStyles />
       <Head>
-        <title>Forma 36 - The Contentful Design System</title>
-        <meta
-          name="description"
-          content="Forma 36 is an open-source design system by Contentful created with the intent to reduce the overhead of creating UI by providing tools and guidance for digital teams building and extending Contentful products."
-        />
-        <meta
-          name="keywords"
-          content="contentful, design, design-system, react, component library"
-        />
+        <title>{siteSettings.siteName}</title>
+        <meta name="description" content={siteSettings.siteDescription} />
+        <meta name="keywords" content={siteSettings.siteKeywords.join(", ")} />
         <link rel="icon" href="/favicon.png" />
       </Head>
 

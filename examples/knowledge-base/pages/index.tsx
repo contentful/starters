@@ -18,7 +18,7 @@ import figmaSVG from "../resources/icons/figma-icon.svg";
 import reactSVG from "../resources/icons/react-icon.svg";
 import homepageImg from "../public/images/homepage-illustration.svg";
 import { SCREEN_BREAKPOINT_LARGE } from "../utils/getGridStyles";
-import { getAllCategories } from "../lib/api";
+import { getAllCategories, getSiteSettings } from "../lib/api";
 import { Layout } from "../components/Layout";
 import type { SidebarProps } from "../components/Sidebar";
 
@@ -127,10 +127,12 @@ export default function Home({ sidebarLinks }) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const sidebarLinks = await getAllCategories();
+  const siteSettings = await getSiteSettings();
 
   return {
     props: {
       sidebarLinks,
+      siteSettings,
     },
   };
 };
