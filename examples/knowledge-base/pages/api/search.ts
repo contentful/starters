@@ -2,6 +2,7 @@ import lunr from "lunr";
 import type { NextApiRequest, NextApiResponse } from "next";
 import fs from "node:fs/promises";
 import path from "node:path";
+import { tmpdir } from "node:os";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 import dotenv from "dotenv-flow";
 
@@ -42,7 +43,7 @@ const truncateContent = async (found: lunr.Index.Result) => {
   };
 };
 
-const searchIndex = path.join(process.cwd(), "searchIndex.json");
+const searchIndex = path.join(tmpdir(), "searchIndex.json");
 
 export default async function handler(
   req: NextApiRequest,
