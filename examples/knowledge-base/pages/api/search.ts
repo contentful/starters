@@ -1,6 +1,6 @@
 import lunr from "lunr";
 import type { NextApiRequest, NextApiResponse } from "next";
-import { readdirSync, readFileSync, writeFileSync } from "fs";
+import { readFileSync, writeFileSync } from "fs";
 import path from "path";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 
@@ -48,15 +48,6 @@ export default async function handler(
     process.env.NODE_ENV === "development"
       ? path.resolve(process.cwd(), "public/json/searchIndex.json")
       : path.resolve(process.cwd(), "public/json/searchIndex.json");
-
-  const dirRelativeToPublicFolder = "json";
-  const dir = path.resolve("./public", dirRelativeToPublicFolder);
-  const filenames = readdirSync(dir);
-  const files = filenames.map((name) =>
-    path.join("/", dirRelativeToPublicFolder, name)
-  );
-
-  console.log({ files });
 
   try {
     const serializedIndex = readFileSync(indexFile, "utf-8");
