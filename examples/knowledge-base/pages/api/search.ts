@@ -38,31 +38,45 @@ const truncateContent = async (found: lunr.Index.Result) => {
   };
 };
 
-const jsonPath = path.join(process.cwd(), 'json');
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
   const { query } = JSON.parse(req.body);
-  let indexToLoad: lunr.Index;
+  let indexToLoad: lunr.Index | undefined = undefined;
+  let indexPath =
+    process.env.NODE_ENV === "development"
+      ? path.join(process.cwd(), "public")
+      : process.cwd();
 
-  console.log({jsonPath})
+  // indexPath = path.join(process.cwd(), "public");
+
   try {
-    const serializedIndex = await fs.readFile(jsonPath + '/searchIndex.json', {
-      encoding: "utf-8",
-    });
-    console.log({serializedIndex})
-    indexToLoad = JSON.parse(serializedIndex);
+    const serializedIndex = await fs.readFile(
+      path.join(indexPath, "searchIndex.json"),
+      "utf-8"
+    );
+    indexToLoad = JSON.parse(serializedIndex) as lunr.Index;
   } catch (error) {
-    console.log({error})
-    // Recreate index
-    indexToLoad = await buildSearchIndex();
-    const serializedIndex = JSON.stringify(indexToLoad);
+    console.log({ error });
 
-    await fs.writeFile(jsonPath + '/searchIndex.json', serializedIndex, {
-      encoding: "utf-8",
-    });
+    // Recreate index for local development
+    if (process.env.NODE_ENV === "development") {
+      indexToLoad = await buildSearchIndex();
+      const serializedIndex = JSON.stringify(indexToLoad);
+
+      await fs.writeFile(
+        path.join(indexPath, "searchIndex.json"),
+        serializedIndex,
+        "utf-8"
+      );
+    }
+  }
+
+  console.log({ indexToLoad });
+
+  if (!indexToLoad) {
+    throw new Error("Failed to load search index file");
   }
 
   const index = lunr.Index.load(indexToLoad);
