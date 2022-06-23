@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/test.js": {
+    "api/search.ts": {
       "includeFiles": "public/json/**"
     }
   }
