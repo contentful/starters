@@ -42,7 +42,7 @@ const truncateContent = async (found: lunr.Index.Result) => {
   };
 };
 
-const searchIndex = path.join(process.cwd(), "public/searchIndex.json");
+const searchIndex = path.join(process.cwd(), "searchIndex.json");
 
 export default async function handler(
   req: NextApiRequest,
