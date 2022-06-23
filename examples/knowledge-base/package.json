@@ -4,9 +4,10 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "build:prod": "npm run ts-node scripts/generate-public-files && next build",
-    "prebuild": "npm run ts-node scripts/generate-search-index",
+    "build:dev": "next build",
+    "build": "yarn prebuild && yarn build:prod",
+    "build:prod": "yarn ts-node scripts/generate-public-files && next build",
+    "prebuild": "yarn ts-node scripts/generate-search-index",
     "start": "next start"
   },
   "dependencies": {
