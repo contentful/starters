@@ -38,7 +38,7 @@ const truncateContent = async (found: lunr.Index.Result) => {
   };
 };
 
-const searchIndex = path.resolve(process.cwd(), 'static', "searchIndex.json");
+const jsonPath = path.join(process.cwd(), 'json');
 
 export default async function handler(
   req: NextApiRequest,
@@ -47,9 +47,9 @@ export default async function handler(
   const { query } = JSON.parse(req.body);
   let indexToLoad: lunr.Index;
 
-  console.log({searchIndex})
+  console.log({jsonPath})
   try {
-    const serializedIndex = await fs.readFile(searchIndex, {
+    const serializedIndex = await fs.readFile(jsonPath + '/searchIndex.json', {
       encoding: "utf-8",
     });
     console.log({serializedIndex})
@@ -60,7 +60,7 @@ export default async function handler(
     indexToLoad = await buildSearchIndex();
     const serializedIndex = JSON.stringify(indexToLoad);
 
-    await fs.writeFile(searchIndex, serializedIndex, {
+    await fs.writeFile(jsonPath + '/searchIndex.json', serializedIndex, {
       encoding: "utf-8",
     });
   }

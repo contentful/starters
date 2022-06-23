@@ -7,7 +7,7 @@ async function run() {
   const index = await buildSearchIndex();
   const serializedIndex = JSON.stringify(index);
 
-  await fs.writeFile(path.resolve('static', "searchIndex.json"), serializedIndex, {
+  await fs.writeFile(path.join('public', 'json', "searchIndex.json"), serializedIndex, {
     encoding: "utf-8",
   });
 }
