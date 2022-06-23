@@ -13,7 +13,6 @@ import { getSingleArticleBySlug } from "../../lib/api";
 
 const truncateContent = async (found: lunr.Index.Result) => {
   const key = Object.keys(found.matchData?.metadata).find((key) => {
-    // console.log(found.matchData.metadata[key]);
     return found.matchData.metadata[key].content?.position;
   });
 
