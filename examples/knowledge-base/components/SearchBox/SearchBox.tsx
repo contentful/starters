@@ -52,7 +52,7 @@ export const SearchBox = () => {
 
 
     return (
-      <Flex flexDirection="column">
+      <Flex flexDirection="column" key={result.slug}>
         <Text
           fontSize="fontSizeM"
           lineHeight="lineHeightM"
