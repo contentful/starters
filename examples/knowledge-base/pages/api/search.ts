@@ -38,7 +38,7 @@ const truncateContent = async (found: lunr.Index.Result) => {
   };
 };
 
-const searchIndex = path.resolve(process.cwd(), "searchIndex.json");
+const searchIndex = path.resolve(process.cwd(), 'files', "searchIndex.json");
 
 export default async function handler(
   req: NextApiRequest,

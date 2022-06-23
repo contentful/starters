@@ -7,8 +7,8 @@ async function run() {
   const index = await buildSearchIndex();
   const serializedIndex = JSON.stringify(index);
 
-  console.log({path: path.resolve('pages/api', "searchIndex.json")})
-  await fs.writeFile(path.resolve('pages/api', "searchIndex.json"), serializedIndex, {
+  console.log({path: path.resolve('files', "searchIndex.json")})
+  await fs.writeFile(path.resolve('files', "searchIndex.json"), serializedIndex, {
     encoding: "utf-8",
   });
 }
