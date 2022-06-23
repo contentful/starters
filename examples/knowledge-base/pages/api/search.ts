@@ -44,10 +44,7 @@ export default async function handler(
 ) {
   const { query } = JSON.parse(req.body);
   let indexToLoad: lunr.Index | undefined = undefined;
-  let indexPath =
-    process.env.NODE_ENV === "development"
-      ? path.join(process.cwd(), "public")
-      : process.cwd();
+  let indexPath = path.resolve("./public");
 
   // indexPath = path.join(process.cwd(), "public");
 
