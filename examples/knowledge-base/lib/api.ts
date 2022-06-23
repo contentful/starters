@@ -5,7 +5,7 @@ import dotenv from "dotenv-flow";
 
 dotenv.config();
 
-const CACHE_FILE = path.resolve(".sidebarLinks.json");
+const CACHE_FILE = path.resolve(".cache/sidebarLinks.json");
 
 const ARTICLE_GRAPHQL_FIELDS = `
 sys {

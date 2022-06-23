@@ -44,10 +44,7 @@ export default async function handler(
 ) {
   const { query } = JSON.parse(req.body);
   let indexToLoad: lunr.Index | undefined = undefined;
-  let indexFile =
-    process.env.NODE_ENV === "development"
-      ? path.resolve(process.cwd(), "public/json/searchIndex.json")
-      : path.resolve(process.cwd(), "public/json/searchIndex.json");
+  let indexFile = path.resolve(process.cwd(), ".cache/searchIndex.json");
 
   try {
     const serializedIndex = await readFile(indexFile, "utf-8");
