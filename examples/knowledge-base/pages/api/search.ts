@@ -2,7 +2,6 @@ import lunr from "lunr";
 import type { NextApiRequest, NextApiResponse } from "next";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { tmpdir } from "node:os";
 import { documentToPlainTextString } from "@contentful/rich-text-plain-text-renderer";
 
 import { buildSearchIndex } from "../../lib/search";
@@ -39,7 +38,7 @@ const truncateContent = async (found: lunr.Index.Result) => {
   };
 };
 
-const searchIndex = path.join(tmpdir(), "searchIndex.json");
+const searchIndex = path.resolve(process.cwd(), "searchIndex.json");
 
 export default async function handler(
   req: NextApiRequest,
@@ -48,12 +47,15 @@ export default async function handler(
   const { query } = JSON.parse(req.body);
   let indexToLoad: lunr.Index;
 
+  console.log({searchIndex})
   try {
     const serializedIndex = await fs.readFile(searchIndex, {
       encoding: "utf-8",
     });
+    console.log({serializedIndex})
     indexToLoad = JSON.parse(serializedIndex);
   } catch (error) {
+    console.log({error})
     // Recreate index
     indexToLoad = await buildSearchIndex();
     const serializedIndex = JSON.stringify(indexToLoad);
