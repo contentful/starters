@@ -47,7 +47,7 @@ export default async function handler(
   let indexFile =
     process.env.NODE_ENV === "development"
       ? path.resolve(process.cwd(), "public/json/searchIndex.json")
-      : path.resolve(process.cwd(), "json/searchIndex.json");
+      : path.resolve(process.cwd(), "public/json/searchIndex.json");
 
   console.log({ indexFile });
 
