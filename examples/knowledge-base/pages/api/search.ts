@@ -44,20 +44,15 @@ export default async function handler(
 ) {
   const { query } = JSON.parse(req.body);
   let indexToLoad: lunr.Index | undefined = undefined;
-  let indexPath =
+  let indexFile =
     process.env.NODE_ENV === "development"
       ? path.resolve("public/json/searchIndex.json")
       : path.resolve("/", "json/searchIndex.json");
 
-  // indexPath = path.join(process.cwd(), "public");
-
-  console.log({ indexPath });
+  console.log({ indexFile });
 
   try {
-    const serializedIndex = await fs.readFile(
-      path.join(indexPath, "searchIndex.json"),
-      "utf-8"
-    );
+    const serializedIndex = await fs.readFile(indexFile, "utf-8");
     indexToLoad = JSON.parse(serializedIndex) as lunr.Index;
   } catch (error) {
     console.log({ error });
@@ -67,11 +62,7 @@ export default async function handler(
       indexToLoad = await buildSearchIndex();
       const serializedIndex = JSON.stringify(indexToLoad);
 
-      await fs.writeFile(
-        path.join(indexPath, "searchIndex.json"),
-        serializedIndex,
-        "utf-8"
-      );
+      await fs.writeFile(indexFile, serializedIndex, "utf-8");
     }
   }
 
