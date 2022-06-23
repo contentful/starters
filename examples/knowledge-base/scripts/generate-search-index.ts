@@ -8,7 +8,7 @@ async function run() {
   const serializedIndex = JSON.stringify(index);
 
   await fs.writeFile(
-    path.join(process.cwd(), "public", "searchIndex.json"),
+    path.join(process.cwd(), "public/json/searchIndex.json"),
     serializedIndex,
     "utf-8"
   );

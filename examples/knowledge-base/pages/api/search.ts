@@ -46,8 +46,8 @@ export default async function handler(
   let indexToLoad: lunr.Index | undefined = undefined;
   let indexPath =
     process.env.NODE_ENV === "development"
-      ? path.resolve("./public/searchIndex.json")
-      : path.resolve("/", "searchIndex.json");
+      ? path.resolve("public/json/searchIndex.json")
+      : path.resolve("/", "json/searchIndex.json");
 
   // indexPath = path.join(process.cwd(), "public");
 
