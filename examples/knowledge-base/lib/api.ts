@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import fetch from "isomorphic-unfetch";
 import dotenv from "dotenv-flow";
+import { SiteSettings } from "../types";
 
 dotenv.config();
 
@@ -99,6 +100,23 @@ export async function getSingleArticleBySlug(slug, preview = false) {
   );
 
   return extractArticle(entry);
+}
+
+export async function getSiteSettings(preview = false): Promise<SiteSettings> {
+  const response = await fetchGraphQL(
+    `query {
+      kbAppSiteSettingsCollection(preview: ${preview}, limit: 1) {
+        items {
+          siteName
+          siteDescription
+          siteKeywords
+        }
+      }
+    }`,
+    preview
+  );
+
+  return response?.data?.kbAppSiteSettingsCollection?.items?.[0];
 }
 
 export async function getAllCategories(preview = false) {
