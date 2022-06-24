@@ -7,18 +7,23 @@ import { GlobalStyles } from "../components/GlobalStyles";
 import { SiteSettings } from "../types";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const siteSettings: SiteSettings = pageProps.siteSettings || {};
+  const siteSettings: SiteSettings | undefined = pageProps.siteSettings;
 
   return (
     <>
       <FormaGlobalStyles />
       <GlobalStyles />
-      <Head>
-        <title>{siteSettings.siteName}</title>
-        <meta name="description" content={siteSettings.siteDescription} />
-        <meta name="keywords" content={siteSettings.siteKeywords.join(", ")} />
-        <link rel="icon" href="/favicon.png" />
-      </Head>
+      {siteSettings && (
+        <Head>
+          <title>{siteSettings.siteName}</title>
+          <meta name="description" content={siteSettings.siteDescription} />
+          <meta
+            name="keywords"
+            content={siteSettings.siteKeywords.join(", ")}
+          />
+          <link rel="icon" href="/favicon.png" />
+        </Head>
+      )}
 
       <Component {...pageProps} />
     </>
