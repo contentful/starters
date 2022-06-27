@@ -2,7 +2,6 @@ import React from "react";
 import type { GetStaticProps } from "next";
 import { css } from "emotion";
 import Image from "next/image";
-import Link from "next/link";
 import tokens from "@contentful/f36-tokens";
 import {
   DisplayText,
@@ -14,8 +13,8 @@ import {
 } from "@contentful/f36-components";
 import { ArrowForwardTrimmedIcon } from "@contentful/f36-icons";
 
-import figmaSVG from "../resources/icons/figma-icon.svg";
-import reactSVG from "../resources/icons/react-icon.svg";
+import formaSVG from "../public/images/forma-icon.svg";
+import nextJsSVG from "../public/images/nextjs-icon.svg";
 import homepageImg from "../public/images/homepage-illustration.svg";
 import { SCREEN_BREAKPOINT_LARGE } from "../utils/getGridStyles";
 import { getAllCategories, getSiteSettings } from "../lib/api";
@@ -42,14 +41,18 @@ const styles = {
       maxWidth: "220px",
     },
   }),
-  imgContainer: css({ flexGrow: 1, "> span": { flexGrow: 1 } }),
+  imgContainer: css({
+    flexGrow: 1,
+    maxWidth: "680px",
+    "> span": { flexGrow: 1 },
+  }),
 };
 
-interface IndexPageProps {
+interface HomePageProps {
   sidebarLinks: SidebarProps["links"];
 }
 
-export default function Home({ sidebarLinks }) {
+export default function Home({ sidebarLinks }: HomePageProps) {
   return (
     <Layout sidebarLinks={sidebarLinks}>
       <article className={styles.grid}>
@@ -65,14 +68,14 @@ export default function Home({ sidebarLinks }) {
               marginBottom="spacing3Xl"
             >
               <DisplayText as="h1" size="large">
-                Build and extend
+                Knowledge base.
                 <br />
-                Contentful products.
+                Contentful + Next.js
               </DisplayText>
 
               <Button
                 as="a"
-                href="/introduction/getting-started"
+                href="/getting-started/overview"
                 variant="primary"
                 size="large"
                 endIcon={<ArrowForwardTrimmedIcon />}
@@ -83,31 +86,23 @@ export default function Home({ sidebarLinks }) {
 
             <Flex className={styles.sections} gap="spacing2Xl">
               <Flex flexDirection="column" alignItems="flex-start">
-                <Image src={figmaSVG} alt="Figma’s logo" />
+                <Image src={formaSVG} alt="Figma’s logo" />
 
-                <Heading marginTop="spacingM">Figma UI Kit</Heading>
-                <Paragraph>
-                  Copy the UI Kit to Figma, publish it as a Team library and
-                  start prototyping.
-                </Paragraph>
-                <TextLink
-                  href="https://www.figma.com/@contentful"
-                  target="_blank"
-                >
-                  Get the Figma UI Kit
+                <Heading marginTop="spacingM">Forma36</Heading>
+                <Paragraph>A design system by Contentful</Paragraph>
+                <TextLink href="https://f36.contentful.com/" target="_blank">
+                  View the documentation
                 </TextLink>
               </Flex>
 
               <Flex flexDirection="column" alignItems="flex-start">
-                <Image src={reactSVG} alt="React’s logo" />
+                <Image src={nextJsSVG} alt="React’s logo" />
 
-                <Heading marginTop="spacingM">React Components</Heading>
-                <Paragraph>
-                  Browse the components and try them out live in the Playground.
-                </Paragraph>
-                <Link href="/components/accordion" passHref>
-                  <TextLink>View the components</TextLink>
-                </Link>
+                <Heading marginTop="spacingM">Next.js</Heading>
+                <Paragraph>The React Framework</Paragraph>
+                <TextLink href="https://nextjs.org/" target="_blank">
+                  View the documentation
+                </TextLink>
               </Flex>
             </Flex>
           </Flex>

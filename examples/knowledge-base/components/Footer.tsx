@@ -53,14 +53,18 @@ export function Footer() {
         </Flex>
 
         <Flex flexDirection="column" alignItems="flex-start" gap="spacingM">
-          <FooterLink isExternal={false} href="/getting-started/overview" label="Getting started" />
-          <FooterLink isExternal={false} href="/getting-started/frequently-asked-questions" label="FAQ" />
+          <FooterLink
+            isExternal={false}
+            href="/getting-started/overview"
+            label="Getting started"
+          />
+          <FooterLink
+            isExternal={false}
+            href="/getting-started/frequently-asked-questions"
+            label="FAQ"
+          />
         </Flex>
       </Flex>
-
-      <Text className={gridStyles.columnStartTwo}>
-        This website is built with Next.js and Forma 36. Deployed with Vercel.
-      </Text>
     </footer>
   );
 }
