@@ -24,6 +24,11 @@ export function getRenderNode(links): RenderNode {
     entryMap.set(entry.sys.id, entry);
   }
 
+  // loop through the hyperlinked entries and add them to the map
+  for (const entry of links.entries.hyperlink) {
+    entryMap.set(entry.sys.id, entry);
+  }
+
   const assetMap = new Map();
   // loop through the assets and add them to the map
   for (const asset of links.assets.block) {
@@ -103,6 +108,14 @@ export function getRenderNode(links): RenderNode {
     },
     [INLINES.HYPERLINK]: (node, children) => {
       return <TextLink href={node.data.uri}>{children}</TextLink>;
+    },
+    [INLINES.ENTRY_HYPERLINK]: (node, children) => {
+      const entry = entryMap.get(node.data.target.sys.id);
+      return (
+        <TextLink href={`/${entry.kbAppCategory.slug}/${entry.slug}`}>
+          {children}
+        </TextLink>
+      );
     },
     [BLOCKS.TABLE]: (node) => {
       // The first element in the array is always the table’s header

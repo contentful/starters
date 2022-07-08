@@ -30,6 +30,22 @@ body {
           code
         }
       }
+      hyperlink {
+        sys {
+          id
+        }
+        __typename
+        ... on KbAppArticle {
+          title
+          slug
+          kbAppCategory {
+            sys {
+              id
+            }
+            slug
+          }
+        }
+      }
     }
     assets {
       block {
